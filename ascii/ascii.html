@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <script src="src/imgToAscii.js"></script>
+</head>
+<body>
+    <!-- <input type='file' accept='image/*' onchange='openFile(event)'><br>
+    <img id='output' style="height:100px; width:100px;"> -->
+
+    <script>
+        let ele = new imgToAscii("img/elefante.png");
+        ele.display();
+    </script>
+    
+</body>
+
+<!-- <script>
+    var openFile = function(file) {
+    var input = file.target;
+
+    var reader = new FileReader();
+    reader.onload = function(){
+      var dataURL = reader.result;
+      var output = document.getElementById('output');
+      output.src = dataURL;
+      
+    };
+    reader.readAsDataURL(input.files[0]);
+  };
+
+</script> -->
+</html>
