@@ -3,31 +3,39 @@
 <head>
     <meta charset="utf-8">
     <script src="src/imgToAscii.js"></script>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- <input type='file' accept='image/*' onchange='openFile(event)'><br>
-    <img id='output' style="height:100px; width:100px;"> -->
-
-    <script>
-        let ele = new imgToAscii("img/elefante.png");
-        ele.display();
-    </script>
+  <div id="wrapper">
+    <div id="input-box">
+      <input type='file' accept='image/*' onchange='openFile(event)'><br>
+      <img id='output'>
+    </div>
+    <div id="imgToAscii">
+      <script>
+        var openFile = function(file) 
+        {
+          var input = file.target;
+      
+          var reader = new FileReader();
+          reader.onload = function()
+          {
+            var dataURL = reader.result;
+            var output = document.getElementById('output');
+            document.getElementById('input-box').style.padding = "10px";
+            output.src = dataURL;
+            let n = new imgToAscii(dataURL, 0.06);
+            n.display()
+            n.displayColor("gray")
+          };
+          reader.readAsDataURL(input.files[0]);
+        };
+      </script>
+    </div>
+    
+  </div>
     
 </body>
 
-<!-- <script>
-    var openFile = function(file) {
-    var input = file.target;
 
-    var reader = new FileReader();
-    reader.onload = function(){
-      var dataURL = reader.result;
-      var output = document.getElementById('output');
-      output.src = dataURL;
-      
-    };
-    reader.readAsDataURL(input.files[0]);
-  };
-
-</script> -->
 </html>
