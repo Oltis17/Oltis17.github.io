@@ -3,39 +3,213 @@
 <head>
     <meta charset="utf-8">
     <script src="src/imgToAscii.js"></script>
+    <script src="src/jscii.js"></script>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 <body>
+  
   <div id="wrapper">
-    <div id="input-box">
-      <input type='file' accept='image/*' onchange='openFile(event)'><br>
-      <img id='output'>
+    <div id="left-panel">
+      <div id="input-box">
+        <h2>Choose local file</h2>
+        <div class="mb-3">
+          <input class="form-control" type="file" id="formFile" accept='image/*' onchange='openFile(event)'>
+        </div>
+        <h2>Work with example</h2>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <label class="input-group-text" for="select">Example</label>
+          </div>
+          <select class="custom-select" id="select" onchange="example()">
+            <option value="0">None</option>
+            <option selected value="1">Elephant</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+          </select>
+        </div>
+        <h3>Preview</h3>
+        <div id="preview">
+          <img id='output'>
+        </div>
+      </div>
+      <div id="methodChoice">
+        <h2>ASCII encode method</h2>
+        <select class="custom-select" id="method" onchange="makeAscii(0)">
+          <option selected value="1">imgToAscii</option>
+          <option value="2">jscii</option>
+          <option value="3">Three</option>
+        </select>
+      </div>
+      <div class="controls">
+        <button type="button" class="b1 pr" onclick="change()">Change color</button><br>
+        <button type="button" class="b1 pr" onclick="def()">Default</button><br>
+        <button type="button" class="b2 pr" onclick="zoom()">+</button>
+        <button type="button" class="b2 pr" onclick="unzoom()">-</button><br>
+        <button type="button" class="btn btn-success b1" onclick="copyToClipboard('imgToAscii-method')">Copy to clipboard</button><br>
+        <button id="myBtn">HELP</button>
+      </div>
     </div>
-    <div id="imgToAscii">
-      <script>
-        var openFile = function(file) 
-        {
-          var input = file.target;
-      
-          var reader = new FileReader();
-          reader.onload = function()
-          {
-            var dataURL = reader.result;
-            var output = document.getElementById('output');
-            document.getElementById('input-box').style.padding = "10px";
-            output.src = dataURL;
-            let n = new imgToAscii(dataURL, 0.06);
-            n.display()
-            n.displayColor("gray")
-          };
-          reader.readAsDataURL(input.files[0]);
-        };
-      </script>
+
+  <div class="box">
+    <div class="content">
+      <textarea readonly id="imgToAscii"></textarea>
+    </div>
+  </div>
+
+  <!-- The Modal -->
+<div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <div id="first">
+      <img src="img/arr1.png">
+      <p>Choose a file to import or work with an example.</p>
+      <p>Currently chosen file can be seen in preview.</p>
+    </div>
+    <div id="second">
+      <img src="img/arr2.png">
+      <p>Toggle between different ASCII encoding methods which are based on different JavaScript libraries.</p>
+    </div>
+    <div id="third">
+      <img src="img/arr3.png">
+      <p>Each method has its own set of settings that can be applied.</p>
+      <p>Feel free to experiment and have fun!</p>
     </div>
     
+    <p>Final output can be copied to clipboard.</p>
+
+    <p id="credit">Made for VIN by Kristína Oltmanová in 2022.</p>
   </div>
+
+</div>
+
     
 </body>
+<script>
+  let z = 0.5;
+  example();
+
+  function example()
+  {
+    var option = document.getElementById("select").value;
+    if (option == "1")
+    {
+      document.getElementById('output').src = "img/elefante.png";
+      makeAscii("img/elefante.png");
+    }
+  }
+  
+  var openFile = function(file) 
+  {
+    document.getElementById("select").value = 0;
+    var input = file.target;
+
+    var reader = new FileReader();
+    reader.onload = function()
+    {
+      dataURL = reader.result;
+
+      var output = document.getElementById('output');
+      output.src = dataURL;
+      makeAscii(dataURL);
+      
+    };
+    reader.readAsDataURL(input.files[0]);
+  };
+
+  function makeAscii(dataURL)
+  {
+    
+    if (dataURL == 0)
+    {
+      dataURL = document.getElementById("output").src;
+    }
+    var method = document.getElementById("method").value;
+    if (method == 1)
+      {
+        n = new imgToAscii(dataURL, 1);
+        n.display();
+        
+      }
+    if (method == 2)
+      {
+        var imgJscii = new Jscii({
+          width: 90,
+          color: true,
+          el: document.getElementById('output'),
+          fn: function(str) 
+          {
+            document.getElementById('imgToAscii').innerHTML = str;
+          }
+        });
+      }
+  }
+
+  function change()
+  {
+    n.displayColor("gray")
+  }
+
+  function def()
+  {
+    n.display()
+  }
+
+  function zoom()
+  {
+    n.hide();
+    z += 0.1;
+    n = new imgToAscii(dataURL, z);
+    n.display()
+  }
+
+  function unzoom()
+  {
+    n.hide();
+    z -= 0.1;
+    n = new imgToAscii(dataURL, z);
+    n.display()
+  }
+
+  function copyToClipboard(id) 
+  {
+    var t = document.getElementById(id).innerHTML;
+    var raw = t.replaceAll("<br>", "\n");
+    console.log(raw);
+    navigator.clipboard.writeText(raw);
+    document.getElementById("clipboard").innerHTML = raw;
+  }
+</script>
+
+<script>
+  // Get the modal
+  var modal = document.getElementById("myModal");
+  
+  // Get the button that opens the modal
+  var btn = document.getElementById("myBtn");
+  
+  // Get the <span> element that closes the modal
+  var span = document.getElementsByClassName("close")[0];
+  
+  // When the user clicks the button, open the modal 
+  btn.onclick = function() {
+    modal.style.display = "block";
+  }
+  
+  // When the user clicks on <span> (x), close the modal
+  span.onclick = function() {
+    modal.style.display = "none";
+  }
+  
+  // When the user clicks anywhere outside of the modal, close it
+  window.onclick = function(event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  }
+  </script>
 
 
 </html>

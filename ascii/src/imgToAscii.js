@@ -1,23 +1,5 @@
 /*
-Copyright (c) 2018 Victor Ribeiro - victorqribeiro@gmail.com
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+Adapted from:
 
 https://github.com/victorqribeiro/imgToAscii
 
@@ -74,30 +56,24 @@ class imgToAscii {
 		}).catch( e => console.error(e) );
 	}
 	
-	getPreElement(){
-		const pre = document.createElement('pre');
-		pre.style.fontFamily = "Courier, monospace";
-		pre.style.lineHeight = "6px";
-		pre.style.fontSize = "11px";
-		pre.style.display = "inline-block";
-		return pre
-	}
-	
-	async display(appendToBody = true){
-        const pre = this.getPreElement();
-        if(appendToBody)
-		    document.body.appendChild(pre);
+
+	async display(){
 		await this.loadImage;
-		pre.innerText = this.string;
-		if(!appendToBody)
-		    return pre
+		document.getElementById("imgToAscii").innerHTML = this.string;
+
+	}
+
+	async hide(){
+        const pre = this.getPreElement();
+		pre.innerText = "";
+		return pre
 	}
 
 	async displayColor(bg, appendToBody = true){
 		const pre = this.getPreElement();
 		pre.style.backgroundColor = bg;
 		if(appendToBody)
-		    document.body.appendChild(pre);
+		    document.getElementById("imgToAscii").appendChild(pre);
 		await this.loadImage;
 		pre.innerHTML = this.stringColor;
 		if(!appendToBody)
