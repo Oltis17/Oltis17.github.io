@@ -1,8 +1,16 @@
 body
 {
     margin: 0;
-    overflow: hidden;s
+    overflow-x: hidden;
+    min-height: 720px;
 }
+
+html, body, #wrapper
+{
+    min-height: 100vh;
+    height: 100%;
+}
+
 #wrapper
 {
     text-align: center;
@@ -17,25 +25,25 @@ body
     margin: auto;
     outline: 2px dashed #92b0b3;
     outline-offset: -10px;
-    height: 40vh;
+    height: 390px;
 }
 
 #wrapper h2
 {
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 1.2rem;
+    font-size: 16px;
 }
 
 #wrapper h3
 {
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 1rem;
+    font-size: 12px;
 }
 
 #preview
 {
     width: 250px;
-    height: 14vh;
+    height: 150px;
     margin: auto;
 }
 
@@ -44,11 +52,12 @@ body
     visibility: visible;
     max-width: 100%;
     max-height: 100%;
+    object-fit: cover;
 }
 
 .content
 {
-    width: calc(100% - 300px); 
+    width: 100%; 
     height: 50%;
     float: left;
     padding: 20px;
@@ -57,18 +66,28 @@ body
 #left-panel
 {
     width: 300px;
-    float: left;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: space-between;
+    overflow-y: auto;
+    overflow-x: hidden;
+    position: fixed;
+    height: 100%;
 }
 
 .box
 {
     margin: auto;
-    
+    margin-left: 300px;
 }
 
 .controls
 {
-    height: 50vh;
+    min-height: 240px;
+    height: calc(100% - 490px);
     background-color: rgb(190, 190, 190);
     padding: 20px;
 }
@@ -116,17 +135,18 @@ body
 
 #methodChoice
 {
-    height: 10vh;
+    height: 100px;
     background-color: rgb(82, 124, 124);
     padding: 20px;
     padding-bottom: 40px;
+    color: white;
 }
 
 .modal {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
     z-index: 1; /* Sit on top */
-    padding-top: 20px; /* Location of the box */
+    padding-top: 10px; /* Location of the box */
     padding-left: 320px;
     padding-right: 20px;
     left: 0;
@@ -136,6 +156,8 @@ body
     overflow: auto; /* Enable scroll if needed */
     background-color: rgb(0,0,0); /* Fallback color */
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    min-height: 680px;
+   
   }
   
   /* Modal Content */
@@ -144,6 +166,8 @@ body
     text-align: left;
     padding: 20px;
     border: 1px solid #888;
+    height: 98vh;
+    min-height: 680px;
   }
   
   /* The Close Button */
@@ -177,19 +201,21 @@ body
 
   #second
   {
-      margin-top: 23.5vh;
+      margin-top: 180px;
   }
 
   #third
   {
-      margin-top: 2vh;
+      margin-top: 10px;
   }
 
   #credit
   {
       font-size: 16px;
       text-align: center;
-      margin-top: 16.5vh;
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
   }
 
 #myBtn
@@ -199,9 +225,6 @@ body
     padding: 5px;
     border-radius: 3px;
     transition: background 0.5s ease-out;
-    position: absolute;
-    bottom: 40px;
-    left: 45px;
     width: 200px;
 }
 
