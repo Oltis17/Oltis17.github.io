@@ -24,8 +24,8 @@
           <select class="custom-select" id="select" onchange="example()">
             <option value="0">None</option>
             <option selected value="1">Elephant</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
+            <option value="2">Lion</option>
+            <option value="3">Hippo</option>
           </select>
         </div>
         <h3>Preview</h3>
@@ -46,7 +46,7 @@
         <button type="button" class="b1 pr" onclick="def()">Default</button><br>
         <button type="button" class="b2 pr" onclick="zoom()">+</button>
         <button type="button" class="b2 pr" onclick="unzoom()">-</button><br>
-        <button type="button" class="btn btn-success b1" onclick="copyToClipboard('imgToAscii-method')">Copy to clipboard</button><br>
+        <button type="button" class="btn btn-success b1" onclick="copyToClipboard('imgToAscii')">Copy to clipboard</button><br>
         <button id="myBtn">HELP</button>
       </div>
     </div>
@@ -99,6 +99,17 @@
       document.getElementById('output').src = "img/elefante.png";
       makeAscii("img/elefante.png");
     }
+    if (option == "2")
+    {
+      document.getElementById('output').src = "img/lion.png";
+      makeAscii("img/lion.png");
+    }
+    if (option == "3")
+    {
+      document.getElementById('output').src = "img/hippo.jpg";
+      makeAscii("img/hippo.jpg");
+    }
+
   }
   
   var openFile = function(file) 
