@@ -4,7 +4,7 @@
  * http://enotionz.github.com/jscii/
  */
 
-!function() {
+ !function() {
 
 	navigator.getUserMedia = navigator.getUserMedia ||
 		navigator.webkitGetUserMedia ||
@@ -48,23 +48,10 @@
 		this.ctx = this.canvas.getContext('2d');
 
 		var nodeName = el.nodeName;
-		if(nodeName === 'IMG') {
-			el.addEventListener('load', function(){ self.render(); });
-		} else if(nodeName === 'VIDEO') {
-			this.interval = typeof params.interval === 'number' ? params.interval : 15;
-			this.webrtc = !!params.webrtc;
-
-			if(this.webrtc) {
-				if(typeof navigator.getUserMedia !== 'function') {
-					return logError((el.innerHTML = 'Error: browser does not support WebRTC'));
-				}
-				navigator.getUserMedia({video: true, audio: false}, function(localMediaStream){
-					self.mediaStream = localMediaStream;
-					el.src = (window.URL || window.webkitURL).createObjectURL(localMediaStream);
-				}, logError);
-			}
-			el.addEventListener('loadeddata', function() { self.play(); });
-		}
+		if(nodeName === 'IMG') 
+		{
+			self.render();
+		} 
 	}
 
 	/**
@@ -116,8 +103,6 @@
 		// might take a few cycles before we
 		if(!width || !height) return;
 
-		this.ctx.crossOrigin = "Anonymous";
-
 		this.ctx.drawImage(this.el, 0, 0, width, height);
 		this.imageData = this.ctx.getImageData(0, 0, width, height).data;
 		var asciiStr = this.getAsciiString();
@@ -143,6 +128,7 @@
 			if(this.color) str += '<font style="color: rgb('+rgb.join(',')+')">'+getChar(val)+'</font>';
 			else str += getChar(val);
 		}
+		document.getElementById('imgToAscii').innerHTML = str;
 		return str;
 	};
 

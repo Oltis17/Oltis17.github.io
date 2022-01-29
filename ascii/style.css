@@ -26,6 +26,7 @@ html, body, #wrapper
     outline: 2px dashed #92b0b3;
     outline-offset: -10px;
     height: 390px;
+    min-height: 390px;
 }
 
 #wrapper h2
@@ -96,6 +97,7 @@ html, body, #wrapper
     margin-bottom: 10px;
 }
 
+
 .b1
 {
     width: 200px;
@@ -142,7 +144,8 @@ html, body, #wrapper
     color: white;
 }
 
-.modal {
+.modal 
+{
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
     z-index: 1; /* Sit on top */
@@ -159,10 +162,11 @@ html, body, #wrapper
     min-height: 680px;
     overflow:auto;
    
-  }
+}
   
   /* Modal Content */
-  .modal-content {
+.modal-content
+{
     background-color: #fefefe;
     text-align: left;
     padding: 20px;
@@ -171,57 +175,59 @@ html, body, #wrapper
     min-height: 680px;
     min-width: 700px;
     overflow: auto;
-  }
+}
   
   /* The Close Button */
-  .close {
+.close 
+{
     color: #aaaaaa;
     float: right;
     font-size: 28px;
     font-weight: bold;
-  }
+}
   
-  .close:hover,
-  .close:focus {
+.close:hover,
+.close:focus 
+{
     color: #000;
     text-decoration: none;
     cursor: pointer;
-  }
+}
 
-  .modal-content img
-  {
+.modal-content img
+{
     width: 250px;
     position: absolute;
-  }
+}
 
-  .modal-content p
-  {
+.modal-content p
+{
     margin-left: 280px;
     padding-top: 40px;
     font-size: 20px;
     float: left;
-  }
+}
 
-  #second
-  {
-      top: 370px;
-      position: absolute;
-  }
+#second
+{
+    top: 370px;
+    position: absolute;
+}
 
-  #third
-  {
-      top: 520px;
-      position: absolute;
-  }
+#third
+{
+    top: 520px;
+    position: absolute;
+}
 
-  #credit
-  {
-      font-size: 16px;
-      text-align: center;
-      position: fixed;
-      bottom: 20px;
-      width: 80%;
-  }
+#credit
+{
+    font-size: 16px;
+    text-align: center;
+    position: fixed;
+    bottom: 20px;
+    width: 80%;
+}
 
 #myBtn
 {
@@ -238,8 +244,6 @@ html, body, #wrapper
     background: rgb(211, 138, 43);
     border: 2px gray;
     cursor: pointer;
-  
-
 }
 
 
@@ -290,6 +294,4 @@ html, body, #wrapper
     padding: 7px;
     border-radius: 3px;
     border: rgb(0, 0, 0) 3px;
-    
-    
 }

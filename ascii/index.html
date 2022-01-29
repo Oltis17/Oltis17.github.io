@@ -5,6 +5,7 @@
     <script src="src/imgToAscii.js"></script>
     <script src="src/jscii.js"></script>
     <script src="src/html2canvas.js"></script>
+    <script type="text/javascript" src="src/aalib.js"></script>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
@@ -39,7 +40,7 @@
         <select class="custom-select" id="method" onchange="makeAscii(0)">
           <option selected value="1">imgToAscii</option>
           <option value="2">jscii</option>
-          <option value="3">Three</option>
+          <option value="3">aalib</option>
         </select>
       </div>
       <div class="controls">
@@ -47,9 +48,9 @@
           <p class="label">Background color:</p>
           <input class="form-control form-control-color" type="color" id="bkgColor" value="#ffffff"><br>
         </div>
-        <button type="button" class="b1 pr" onclick="change()">Change color</button><br>
-        <button type="button" class="b1 pr" onclick="def()">Default</button><br>
+        <button type="button" class="b1 pr" onclick="change()" id="change">Colorize</button><br>
         <div id="zoomDiv">
+          <h2>Zoom level</h2>
           <input type="range" class="form-range" min="10" max="100" step="5" id="zoom" value="100">
           <p id="zoomVal">100%</p>
           <br>
@@ -66,10 +67,7 @@
     </div>
   </div>
 
-  <!-- The Modal -->
 <div id="myModal" class="modal">
-
-  <!-- Modal content -->
   <div class="modal-content">
     <span class="close">&times;</span>
     <div id="first">
@@ -89,9 +87,6 @@
         <br>Final output can be copied to clipboard.
         <br>Feel free to experiment and have fun!</p>
     </div>
-    
-    
-    
 
     <span id="credit">Made for VIN by Kristína Oltmanová in 2022.</span>
   </div>
@@ -101,7 +96,7 @@
     
 </body>
 <script>
-  let z = 0.5;
+  let string = "";
   var n;
 
   example();
@@ -154,56 +149,88 @@
     }
     var method = document.getElementById("method").value;
     if (method == 1)
-      {
-        document.getElementById("zoom").value = 100;
-        document.getElementById("zoomVal").innerHTML = "100%";
-        document.getElementById("bkgColor").value = "#ffffff";
-        document.getElementById("imgToAscii").style.backgroundColor = "#ffffff";
-        n = new imgToAscii(dataURL, 1);
-        n.display();
-        
-      }
+    {
+      document.getElementById('imgToAscii').innerHTML = "";
+      document.getElementById('imgToAscii').style = "";
+      document.getElementById("zoom").value = 100;
+      document.getElementById("zoomVal").innerHTML = "100%";
+      document.getElementById("bkgColor").value = "#ffffff";
+      document.getElementById("imgToAscii").style.backgroundColor = "#ffffff";
+      n = new imgToAscii(dataURL, 1);
+      n.display();
+      
+    }
     if (method == 2)
+    {
+      document.getElementById('imgToAscii').innerHTML = "";
+      document.getElementById('imgToAscii').style = "";
+      var imgJscii = new Jscii(
       {
-        var imgJscii = new Jscii({
-          width: 90,
-          color: true,
-          el: document.getElementById('output'),
-          fn: function(str) 
-          {
-            document.getElementById('imgToAscii').innerHTML = str;
-          }
-        });
-      }
+        width: 100,
+        color: false,
+        el: document.getElementById('output')
+      });
+    }
+    if (method == 3)
+    {
+      aalib.read.image.fromURL(document.getElementById("output").src)
+        .map(aalib.filter.contrast(0.9))
+        .map(aalib.aa({ width: 600, height: 160 }))
+        .map(aalib.filter.brightness(10))
+        .map(aalib.render.html({ el: document.getElementById("imgToAscii") }))
+        .subscribe();
+        }
   }
 
   function change()
   {
-    n.displayColor();
+    var d = document.getElementById("change").innerHTML;
+    var method = document.getElementById("method").value;
+    if (d == "Default (black)")
+    {
+      document.getElementById("change").innerHTML = "Colorize";
+      document.getElementById("bkgColor").value = "#ffffff";
+      document.getElementById("imgToAscii").style.backgroundColor = "#ffffff";
+
+      if (method == 1)
+      {
+        n.display()
+      }
+      if (method == 2)
+      {
+        document.getElementById('imgToAscii').innerHTML = "";
+        var imgJscii = new Jscii(
+        {
+          width: parseInt(document.getElementById("zoom").value),
+          color: false,
+          el: document.getElementById('output')
+        });
+      }
+
+    }
+    else
+    {
+      document.getElementById("change").innerHTML = "Default (black)";
+      document.getElementById("bkgColor").value = "#888888";
+      document.getElementById("imgToAscii").style.backgroundColor = "#888888";
+      if (method == 1)
+      {
+        n.displayColor()
+      }
+      if (method == 2)
+      {
+        document.getElementById('imgToAscii').innerHTML = "";
+        var imgJscii = new Jscii(
+        {
+          width: parseInt(document.getElementById("zoom").value),
+          color: true,
+          el: document.getElementById('output')
+        });
+      }
+    }
+    
   }
 
-  function def()
-  {
-    n.display();
-  }
-
-  function zoom()
-  {
-    n.hide();
-    z += 0.1;
-    dataURL = document.getElementById("output").src;
-    n = new imgToAscii(dataURL, z);
-    n.display()
-  }
-
-  function unzoom()
-  {
-    n.hide();
-    z -= 0.1;
-    dataURL = document.getElementById("output").src;
-    n = new imgToAscii(dataURL, z);
-    n.display()
-  }
 
   function copyToClipboard(id) 
   {
@@ -242,13 +269,28 @@
   // S L I D E R
   document.getElementById("zoom").oninput = function() 
   {
+    var method = document.getElementById("method").value;
     document.getElementById("zoomVal").innerHTML = this.value + "%";
-    n.hide();
-    dataURL = document.getElementById("output").src;
-    n = new imgToAscii(dataURL, this.value / 100);
-    n.display()
+    if (method == 1)
+    {
+      n.hide();
+      dataURL = document.getElementById("output").src;
+      n = new imgToAscii(dataURL, this.value / 100);
+      n.display()
+    }
+    if (method == 2)
+    {
+      document.getElementById('imgToAscii').innerHTML = "";
+      var imgJscii = new Jscii(
+      {
+        width: parseInt(this.value),
+        color: (document.getElementById("change").innerHTML == "Default (black)"),
+        el: document.getElementById('output')
+      });
+    }
   }
 
+  // B A C K G R O U N D  C O L O R
   document.getElementById("bkgColor").oninput = function() 
   {
     document.getElementById("imgToAscii").style.backgroundColor = this.value;
