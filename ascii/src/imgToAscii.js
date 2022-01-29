@@ -70,14 +70,10 @@ class imgToAscii {
 	}
 
 	async displayColor(bg, appendToBody = true){
-		const pre = this.getPreElement();
+		const pre = document.getElementById("imgToAscii");
 		pre.style.backgroundColor = bg;
-		if(appendToBody)
-		    document.getElementById("imgToAscii").appendChild(pre);
 		await this.loadImage;
 		pre.innerHTML = this.stringColor;
-		if(!appendToBody)
-		    return pre
 	}
 
 }

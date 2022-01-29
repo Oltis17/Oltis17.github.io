@@ -1,8 +1,8 @@
 body
 {
     margin: 0;
-    overflow-x: hidden;
     min-height: 720px;
+    overflow-x: hidden;
 }
 
 html, body, #wrapper
@@ -157,6 +157,7 @@ html, body, #wrapper
     background-color: rgb(0,0,0); /* Fallback color */
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
     min-height: 680px;
+    overflow:auto;
    
   }
   
@@ -168,6 +169,8 @@ html, body, #wrapper
     border: 1px solid #888;
     height: 98vh;
     min-height: 680px;
+    min-width: 700px;
+    overflow: auto;
   }
   
   /* The Close Button */
@@ -188,25 +191,27 @@ html, body, #wrapper
   .modal-content img
   {
     width: 250px;
-    float: left;
+    position: absolute;
   }
 
   .modal-content p
   {
-    margin-left: 20px;
-    padding-top: 60px;
+    margin-left: 280px;
+    padding-top: 40px;
     font-size: 20px;
     float: left;
   }
 
   #second
   {
-      margin-top: 180px;
+      top: 370px;
+      position: absolute;
   }
 
   #third
   {
-      margin-top: 10px;
+      top: 520px;
+      position: absolute;
   }
 
   #credit
@@ -215,7 +220,7 @@ html, body, #wrapper
       text-align: center;
       position: fixed;
       bottom: 20px;
-      left: 50%;
+      width: 80%;
   }
 
 #myBtn
@@ -235,4 +240,56 @@ html, body, #wrapper
     cursor: pointer;
   
 
+}
+
+
+#zoomDiv 
+{
+    padding: 10px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+
+#zoomDiv input
+{
+    width: 75%;
+    float: left;
+    margin-top: 5px;
+}
+
+#zoomDiv p
+{
+    width: 20%;
+    float: right;
+}
+
+#bkgColor
+{
+    float: right;
+    width: 50px;
+    height: 39px;
+    padding: 3px;
+    margin: 0;
+    background-color: #e9ecef;
+    position: absolute;
+    top: 510px;
+    left: 230px;
+}
+
+.label
+{
+    float: left;
+    width: 140px;
+    color: rgb(70, 70, 70);
+}
+
+#colorInput
+{
+    background-color: white;
+    padding: 7px;
+    border-radius: 3px;
+    border: rgb(0, 0, 0) 3px;
+    
+    
 }
