@@ -29,14 +29,14 @@ This tool combines 3 ASCII generating libraries and allows user to apply setting
 
 User can get more information when clicking the HELP button.
 
-![](img/help.png)
+![](examples/help.png)
 
 ## Usage example
 
-<img src="img/clicks.gif" width=600px/>
+<img src="examples/clicks.gif" width=600px/>
 
 ## Output examples
-<img src="img/ex3.png" width=600px/>
+<img src="examples/ex3.png" width=600px/>
 
 Method: imgToAscii
 
@@ -45,7 +45,7 @@ Multicolor
 Zoom: 20%
 
 
-<img src="img/ex4.png" width=600px/>
+<img src="examples/ex4.png" width=600px/>
 
 Example: hippo
 
@@ -56,7 +56,7 @@ Single color
 Default Settings
 
 
-<img src="img/ex1.png" width=600px/>
+<img src="examples/ex1.png" width=600px/>
 
 Example: lion
 
@@ -67,7 +67,7 @@ Multicolor
 Darker background
 
 
-<img src="img/ex2.png" width=600px/>
+<img src="examples/ex2.png" width=600px/>
 
 Method: aalib
 

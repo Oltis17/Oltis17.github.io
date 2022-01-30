@@ -190,8 +190,9 @@
     makeAscii(0);
   }
 
-  example();
 
+  // E X A M P L E
+  example();
   function example()
   {
     var option = document.getElementById("select").value;
@@ -224,6 +225,7 @@
     makeAscii(document.getElementById('output').src);
   }
   
+  // O P E N I N G   L O C A L   F I L E
   var openFile = function(file) 
   {
     document.getElementById("select").value = 0;
@@ -252,6 +254,7 @@
     img4dim.src = document.getElementById('output').src;
   };
 
+  // A A L I B
   function aalibMethod()
   {
     var w = document.getElementById("widthVal").value;
@@ -280,6 +283,7 @@
     changeTextColor();
   }
 
+  // A S C I I   E N C O D I I N G
   function makeAscii(dataURL)
   {
     if (dataURL == 0)
@@ -291,7 +295,6 @@
     {
       document.getElementById("zoomDiv").style.display = "";
       document.getElementById("dimensions").style.display = "none";
-      //document.getElementById("colorText").style.display = "none";
 
       document.getElementById('imgToAscii').innerHTML = "";
       document.getElementById('imgToAscii').style = "";
@@ -307,7 +310,6 @@
     {
       document.getElementById("zoomDiv").style.display = "";
       document.getElementById("dimensions").style.display = "none";
-      //document.getElementById("colorText").style.display = "none";
 
       document.getElementById('imgToAscii').innerHTML = "";
       document.getElementById('imgToAscii').style = "";
@@ -323,13 +325,13 @@
       document.getElementById('imgToAscii').innerHTML = "";
       document.getElementById("zoomDiv").style.display = "none";
       document.getElementById("dimensions").style.display = "";
-      //document.getElementById("colorText").style.display = "";
       
       aalibMethod();
     }
     changeTextColor();
   }
 
+  // M U L T I C O L O R
   function change()
   {
     var d = document.getElementById("change").innerHTML;
@@ -388,10 +390,8 @@
         document.getElementById('imgToAscii').innerHTML = "";
         aalibMethod();
       }
-      
     }
     changeTextColor();
-    
   }
 
   // C O P Y   T O   C L I P B O A R D
@@ -410,9 +410,7 @@
     }
     
   }
-</script>
 
-<script>
   // M O D A L
   var modal = document.getElementById("myModal");
   var btn = document.getElementById("myBtn");
@@ -473,7 +471,6 @@
  
 
   // I M A G E  D O W N L O A D
-
   document.getElementById("download").addEventListener("click", function() {
     html2canvas(document.querySelector('#imgToAscii')).then(function(canvas) {
 
@@ -482,28 +479,23 @@
 });
 
 
-function saveAs(uri, filename) {
-
+  function saveAs(uri, filename) 
+  {
     var link = document.createElement('a');
 
-    if (typeof link.download === 'string') {
-
+    if (typeof link.download === 'string') 
+    {
         link.href = uri;
         link.download = filename;
 
-        //Firefox requires the link to be in the body
         document.body.appendChild(link);
-
-        //simulate click
         link.click();
-
-        //remove the link when done
         document.body.removeChild(link);
+    } 
 
-    } else {
-
+    else 
+    {
         window.open(uri);
-
     }
 }
   </script>
