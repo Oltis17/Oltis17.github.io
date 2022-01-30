@@ -13,6 +13,15 @@ This tool combines 3 ASCII generating libraries and allows user to apply setting
 
     One of 3 supported libraries can be chosen. Different setting may be avilable for diffeent libraries.
 
+    Used external libraries:
+
+    [ImgToAscii](https://github.com/victorqribeiro/imgToAscii)
+
+    [jscii](https://github.com/EnotionZ/jscii)
+
+    [Aalib.js](https://github.com/mir3z/aalib.js)
+
+
 3. Settings
 
 - colors of text and background can be changed
