@@ -446,7 +446,17 @@
       n.hide();
       dataURL = document.getElementById("output").src;
       n = new imgToAscii(dataURL, this.value / 100);
-      n.display()
+      var d = document.getElementById("change").innerHTML;
+    
+      if (d == "Default (single color)")
+      {
+        n.displayColor()
+      }
+      else
+      {
+        n.display()
+      }
+        
     }
     if (method == 2)
     {
