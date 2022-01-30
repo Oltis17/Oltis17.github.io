@@ -8,6 +8,12 @@
     <script type="text/javascript" src="src/aalib.js"></script>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Ubuntu+Mono" />
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Inconsolata" />
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Roboto+Mono" />
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Source+Code+Pro" />
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Cutive+Mono" />
+    <title>ASCII art generator</title>
 </head>
 <body>
   
@@ -44,20 +50,71 @@
         </select>
       </div>
       <div class="controls">
+        <button id="myBtn" class="btn b1">HELP</button>
+        <button type="button" class="btn btn-success b1" onclick="copyToClipboard('imgToAscii')">Copy to clipboard</button><br>
+        <button class="btn btn-success b1" id="download">Download as PNG</button><br>
+        
         <div id="colorInput">
           <p class="label">Background color:</p>
           <input class="form-control form-control-color" type="color" id="bkgColor" value="#ffffff"><br>
         </div>
-        <button type="button" class="b1 pr" onclick="change()" id="change">Colorize</button><br>
+        <div id="colorText">
+          <p class="label">Text color:</p>
+          <input class="form-control form-control-color" type="color" id="textColor" value="#000000"><br>
+        </div>
+        <button type="button" class="b1 pr" onclick="change()" id="change">Colorize (multicolor)</button><br>
         <div id="zoomDiv">
           <h2>Zoom level</h2>
           <input type="range" class="form-range" min="10" max="100" step="5" id="zoom" value="100">
           <p id="zoomVal">100%</p>
           <br>
-      </div>
-        <button type="button" class="btn btn-success b1" onclick="copyToClipboard('imgToAscii')">Copy to clipboard</button><br>
-        <button class="btn btn-success b1" id="download">Download as PNG</button><br>
-        <button id="myBtn">HELP</button>
+        </div>
+        <div id="dimensions">
+          <form>
+              <div class=" mb-3 field">
+                <label for="validationServer01">Width</label>
+                <input type="number" class="form-control" id="widthVal" value="500" required>
+                <div class="valid-feedback">
+                </div>
+              </div>
+
+              <div class=" mb-3 field">
+                <label for="validationServer01">Height</label>
+                <input type="number" class="form-control" id="heightVal" value="400" required>
+              </div>
+              <div class="mb-3" id="size">
+                <label for="validationServer01">Fontsize</label>
+                <div>
+                  <input type="number" class="form-control" id="fontSize" value="7" required>
+
+                </div>
+              </div>
+              <label for="fonts" style="margin-top: 10px;">Font Family</label>
+              <select style="font-family: monospace" id="fonts" class="custom-select" onchange="makeAscii(0)">
+                <option selected value="monospace" style="font-family: monospace">
+                  monospace
+                </option>
+                <option value="Inconsolata" style="font-family: Inconsolata;">
+                  Inconsolata
+                </option>
+                <option value="Ubuntu Mono" style="font-family: Ubuntu Mono">
+                  Ubuntu Mono
+                </option>
+                <option value="Roboto Mono" style="font-family: Roboto Mono">
+                  Roboto Mono
+                </option>
+                <option value="Source Code Pro" style="font-family: Source Code Pro">
+                  Source Code Pro
+                </option>
+                <option value="Cutive Mono" style="font-family: Cutive Mono">
+                  Cutive Mono
+                </option>
+                
+              </select>
+              <button type="button" class="b1 pr" onclick="makeAscii(0)" id="changeDim">Apply</button><br>
+          </form>
+          </div>
+        
       </div>
     </div>
 
@@ -99,6 +156,40 @@
   let string = "";
   var n;
 
+  // B A C K G R O U N D  C O L O R
+  function changeBackground()
+  {
+    document.getElementById("imgToAscii").style.backgroundColor = document.getElementById("bkgColor").value;
+  }
+  document.getElementById("bkgColor").oninput = function() 
+  {
+    changeBackground();
+  }
+
+  // T E X T  C O L O R
+  function changeTextColor()
+  {
+    document.getElementById("imgToAscii").style.color = document.getElementById("textColor").value;
+
+  }
+  document.getElementById("textColor").oninput = function() 
+  {
+    changeTextColor();
+  }
+
+  // F O N T  S I Z E
+  document.getElementById("fontSize").oninput = function() 
+  {
+    makeAscii(0);
+  }
+
+  // F O N T  F A M I L Y 
+  document.getElementById("fonts").onchange = function() 
+  {
+    document.getElementById("fonts").style.fontFamily = this.value;
+    makeAscii(0);
+  }
+
   example();
 
   function example()
@@ -107,19 +198,30 @@
     if (option == "1")
     {
       document.getElementById('output').src = "img/elefante.png";
-      makeAscii("img/elefante.png");
     }
     if (option == "2")
     {
       document.getElementById('output').src = "img/lion.png";
-      makeAscii("img/lion.png");
     }
     if (option == "3")
     {
       document.getElementById('output').src = "img/hippo.jpg";
-      makeAscii("img/hippo.jpg");
+      
     }
 
+    const img4dim = new Image();
+    img4dim.onload = function() 
+    {
+      var divW = Math.round(document.getElementById("imgToAscii").parentElement.offsetWidth);
+      var divH = Math.round(document.getElementById("imgToAscii").parentElement.offsetHeight / 9);
+      console.log(divW, divH);
+      document.getElementById("heightVal").value = divH;
+      document.getElementById("widthVal").value = Math.round((divH*2) * this.width / this.height);
+         
+    }
+    img4dim.src = document.getElementById('output').src;
+
+    makeAscii(document.getElementById('output').src);
   }
   
   var openFile = function(file) 
@@ -138,11 +240,48 @@
       
     };
     reader.readAsDataURL(input.files[0]);
+    const img4dim = new Image();
+    img4dim.onload = function() 
+    {
+      var divW = Math.round(document.getElementById("imgToAscii").parentElement.offsetWidth);
+      var divH = Math.round(document.getElementById("imgToAscii").parentElement.offsetHeight / 9);
+      document.getElementById("heightVal").value = divH;
+      document.getElementById("widthVal").value = Math.round((divH*2) * this.width / this.height);
+         
+    }
+    img4dim.src = document.getElementById('output').src;
   };
+
+  function aalibMethod()
+  {
+    var w = document.getElementById("widthVal").value;
+    var h = document.getElementById("heightVal").value;
+    var i = document.getElementById("change").innerHTML;
+    var s = document.getElementById("fontSize").value;
+    var f = document.getElementById("fonts").value;
+
+    aalib.read.image.fromURL(document.getElementById("output").src)
+        .map(aalib.filter.contrast(0.9))
+        .map(aalib.aa(
+          { 
+            width: w, 
+            height: h, 
+            colored: (i != "Colorize (multicolor)")
+          }))
+        .map(aalib.filter.brightness(10))
+        .map(aalib.render.html(
+          { 
+            el: document.getElementById("imgToAscii"),
+            fontSize: s,
+            fontFamily: f
+          }))
+        .subscribe();
+    changeBackground();
+    changeTextColor();
+  }
 
   function makeAscii(dataURL)
   {
-    
     if (dataURL == 0)
     {
       dataURL = document.getElementById("output").src;
@@ -150,6 +289,10 @@
     var method = document.getElementById("method").value;
     if (method == 1)
     {
+      document.getElementById("zoomDiv").style.display = "";
+      document.getElementById("dimensions").style.display = "none";
+      //document.getElementById("colorText").style.display = "none";
+
       document.getElementById('imgToAscii').innerHTML = "";
       document.getElementById('imgToAscii').style = "";
       document.getElementById("zoom").value = 100;
@@ -162,6 +305,10 @@
     }
     if (method == 2)
     {
+      document.getElementById("zoomDiv").style.display = "";
+      document.getElementById("dimensions").style.display = "none";
+      //document.getElementById("colorText").style.display = "none";
+
       document.getElementById('imgToAscii').innerHTML = "";
       document.getElementById('imgToAscii').style = "";
       var imgJscii = new Jscii(
@@ -173,24 +320,27 @@
     }
     if (method == 3)
     {
-      aalib.read.image.fromURL(document.getElementById("output").src)
-        .map(aalib.filter.contrast(0.9))
-        .map(aalib.aa({ width: 600, height: 160 }))
-        .map(aalib.filter.brightness(10))
-        .map(aalib.render.html({ el: document.getElementById("imgToAscii") }))
-        .subscribe();
-        }
+      document.getElementById('imgToAscii').innerHTML = "";
+      document.getElementById("zoomDiv").style.display = "none";
+      document.getElementById("dimensions").style.display = "";
+      //document.getElementById("colorText").style.display = "";
+      
+      aalibMethod();
+    }
+    changeTextColor();
   }
 
   function change()
   {
     var d = document.getElementById("change").innerHTML;
     var method = document.getElementById("method").value;
-    if (d == "Default (black)")
+    
+    if (d == "Default (single color)")
     {
-      document.getElementById("change").innerHTML = "Colorize";
+      document.getElementById("change").innerHTML = "Colorize (multicolor)";
       document.getElementById("bkgColor").value = "#ffffff";
       document.getElementById("imgToAscii").style.backgroundColor = "#ffffff";
+      document.getElementById("colorText").style.display = "";
 
       if (method == 1)
       {
@@ -206,13 +356,19 @@
           el: document.getElementById('output')
         });
       }
+      if (method == 3)
+      {
+        document.getElementById('imgToAscii').innerHTML = "";
+        aalibMethod();
+      }
 
     }
     else
     {
-      document.getElementById("change").innerHTML = "Default (black)";
+      document.getElementById("change").innerHTML = "Default (single color)";
       document.getElementById("bkgColor").value = "#888888";
       document.getElementById("imgToAscii").style.backgroundColor = "#888888";
+      document.getElementById("colorText").style.display = "none";
       if (method == 1)
       {
         n.displayColor()
@@ -227,18 +383,32 @@
           el: document.getElementById('output')
         });
       }
+      if (method == 3)
+      {
+        document.getElementById('imgToAscii').innerHTML = "";
+        aalibMethod();
+      }
+      
     }
+    changeTextColor();
     
   }
 
-
+  // C O P Y   T O   C L I P B O A R D
   function copyToClipboard(id) 
   {
-    var t = document.getElementById(id).innerHTML;
-    var raw = t.replaceAll("<br>", "\n");
-    console.log(raw);
-    navigator.clipboard.writeText(raw);
-    document.getElementById("clipboard").innerHTML = raw;
+    if (document.getElementById("change") == "Colorize (multicolor)")
+    {
+      var t = document.getElementById(id).innerHTML;
+      var raw = t.replaceAll("<br>", "\n");
+      navigator.clipboard.writeText(raw);
+    }
+    else
+    {
+      var raw = document.getElementById(id).outerText;
+      navigator.clipboard.writeText(raw);
+    }
+    
   }
 </script>
 
@@ -284,17 +454,13 @@
       var imgJscii = new Jscii(
       {
         width: parseInt(this.value),
-        color: (document.getElementById("change").innerHTML == "Default (black)"),
+        color: (document.getElementById("change").innerHTML == "Default (single color)"),
         el: document.getElementById('output')
       });
     }
   }
 
-  // B A C K G R O U N D  C O L O R
-  document.getElementById("bkgColor").oninput = function() 
-  {
-    document.getElementById("imgToAscii").style.backgroundColor = this.value;
-  }
+ 
 
   // I M A G E  D O W N L O A D
 

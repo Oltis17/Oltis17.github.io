@@ -87,7 +87,7 @@ html, body, #wrapper
 
 .controls
 {
-    min-height: 240px;
+    min-height: 500px;
     height: calc(100% - 490px);
     background-color: rgb(190, 190, 190);
     padding: 20px;
@@ -100,7 +100,7 @@ html, body, #wrapper
 
 .b1
 {
-    width: 200px;
+    width: 100%;
 }
 
 .pr
@@ -236,7 +236,6 @@ html, body, #wrapper
     padding: 5px;
     border-radius: 3px;
     transition: background 0.5s ease-out;
-    width: 200px;
 }
 
 #myBtn:hover
@@ -277,7 +276,20 @@ html, body, #wrapper
     margin: 0;
     background-color: #e9ecef;
     position: absolute;
-    top: 510px;
+    top: 650px;
+    left: 230px;
+}
+
+#textColor
+{
+    float: right;
+    width: 50px;
+    height: 39px;
+    padding: 3px;
+    margin: 0;
+    background-color: #e9ecef;
+    position: absolute;
+    top: 697px;
     left: 230px;
 }
 
@@ -288,10 +300,56 @@ html, body, #wrapper
     color: rgb(70, 70, 70);
 }
 
-#colorInput
+#colorInput, #colorText
 {
     background-color: white;
     padding: 7px;
     border-radius: 3px;
     border: rgb(0, 0, 0) 3px;
+    text-align: left;
+}
+
+#colorText
+{
+    margin-top: 10px;
+}
+
+#dimensions
+{
+    width: 100%;
+    border: 2px dashed gray;
+    margin-bottom: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-top: 0px;
+}
+
+#dimensions button
+{
+    margin-top: 10px;
+}
+
+#dimensions form
+{
+    width: 100%;
+    text-align: center;
+}
+
+.form-row
+{
+    width: 100%;
+}
+
+.field, #size label, #size div
+{
+    width: 40%;
+    margin-left: 5%;
+    margin-right: 5%;
+    float: left;
+}
+
+#size label
+{
+    padding-top: 5px;
+    text-align: right;
 }
