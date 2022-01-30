@@ -33,10 +33,10 @@ User can get more information when clicking the HELP button.
 
 ## Usage example
 
-![](img/clicks.gif)
+<img src="img/clicks.gif" width=600px/>
 
 ## Output examples
-![](img/ex3.png)
+<img src="img/ex3.png" width=600px/>
 
 Method: imgToAscii
 
@@ -45,7 +45,7 @@ Multicolor
 Zoom: 20%
 
 
-![](img/ex4.png)
+<img src="img/ex4.png" width=600px/>
 
 Example: hippo
 
@@ -56,7 +56,7 @@ Single color
 Default Settings
 
 
-![](img/ex1.png)
+<img src="img/ex1.png" width=600px/>
 
 Example: lion
 
@@ -67,7 +67,7 @@ Multicolor
 Darker background
 
 
-![](img/ex2.png)
+<img src="img/ex2.png" width=600px/>
 
 Method: aalib
 
