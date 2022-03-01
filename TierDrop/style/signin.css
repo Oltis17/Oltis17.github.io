@@ -1,0 +1,126 @@
+#sign-in, #register
+{
+    text-align: center;
+    width: 50%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+.in
+{
+    font-family: Helvetica, FontAwesome;
+
+    width: 220px;
+    height: 40px;
+    padding: 4px 8px 4px 8px;
+    box-shadow: 3px 4px 5px rgba(0, 78, 99, 0.33);
+    background: #ffffff;
+    color: rgb(172, 172, 172);
+    border-color: #008db1;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 17px 17px 17px 17px;
+    font-weight: 400;
+    font-size: 16px;
+    text-align: left;
+    margin-bottom: 20px; 
+    
+    display: flex;
+    align-items: center;
+}
+
+.in input
+{
+    border: none;
+    margin-left: 10px;
+    width: 260px;
+}
+
+.in input:focus
+{
+    color: #000000;
+    outline: none;
+}
+
+.in:focus-within 
+{
+    box-shadow: 0px 0px 10px 4px rgba(0, 78, 99, 0.65);
+    color: #000000;
+  }
+
+
+#sign-in label a, #register label a
+{
+    color: black;
+    cursor: pointer;
+}
+#register label a
+{
+    text-decoration: underline;
+}
+
+
+#sign-in button, #register button
+{
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+#color-btn
+{
+    width: 115px;
+    height: 35px;
+    padding: 0px 10px 0px 10px;
+    box-shadow: 3px 4px 5px rgba(0, 78, 99, 0.33);
+    background: linear-gradient(to right, rgb(116, 178, 217) 0%, rgb(83, 197, 220) 100%);
+    color: #000000;
+    border-color: #008db1;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 15px 15px 15px 15px;
+    font-family: "Helvetica";
+    font-size: 18px;
+    text-align: center;
+    margin-top: 10px;
+}
+
+#simple-btn
+{
+    width: 115px;
+    height: 35px;
+    padding: 0px 10px 0px 10px;
+    box-shadow: 3px 4px 5px rgba(0, 78, 99, 0.33);
+    background: white;
+    color: #008db1;
+    border-color: #008db1;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 15px 15px 15px 15px;
+    font-family: "Helvetica";
+    font-size: 18px;
+    text-align: center;
+    margin-top: 10px;
+}
+
+h2
+{
+    padding-bottom: 40px;
+}
+
+#back
+{
+    background: rgb(255,255,255);
+    background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 50%, rgba(147,147,147,1) 100%);
+    height: calc(100vh - 126px);
+    width: 100vw;
+    position: absolute;
+    top: 62px;
+    left: 0;
+}
+
+#content
+{
+    padding-top: 15vh;
+}
