@@ -152,7 +152,7 @@
 .objects-choice
 {
     text-align: center;
-    padding: 0px 20px 5px 20px;
+    padding: 0px 20px 20px 20px;
 }
 
 .objects-choice h2
@@ -298,13 +298,14 @@
 #full-width
 {
     padding-bottom: 20px;
-    background-color: black;
+    /* background-color: black; */
 }
 
 .work-area, .objects-choice
 {
     max-width: 1500px;
     margin: auto;
+    background-color: black;
 }
 
 #row-name
