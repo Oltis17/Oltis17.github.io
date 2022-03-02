@@ -77,6 +77,9 @@
 {
     width: 80%;
     background-color: rgb(39, 39, 39);
+    margin-left: 2px;
+    margin-right: 2px;
+    text-align: left;
 }
 
 .tier-col-r
@@ -98,7 +101,7 @@
 
 .tier-col-r div
 {
-    padding-top: 40%;
+    padding-top: 55%;
 }
 
 .up 
