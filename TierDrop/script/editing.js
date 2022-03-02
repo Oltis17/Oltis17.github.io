@@ -54,6 +54,9 @@ $(document).on('click', '.down', function ()
 });
 
 
+let dragOnpage = false;
+let dragged;
+
 document.addEventListener("dragover", function(event) {
     event.preventDefault();
   }, false);
@@ -78,10 +81,35 @@ document.addEventListener("drop", function( event ) {
     // reset background of potential drop target when the draggable element leaves it
     event.preventDefault();
     if ( event.target.className == "tier-col-m" ) {
-        imageInput(event);
-        event.target.style.background = "";
+        if (!dragOnpage)
+        {
+            imageInput(event);
+            event.target.style.background = "";
+        }
+        else
+        {
+            dragged.remove();
+            imageInput(event);
+            event.target.style.background = "";
+        }
+        
     }
 
+}, false);
+
+
+document.addEventListener("dragstart", function( event ) {
+    // store a ref. on the dragged elem
+    dragOnpage = true;
+    dragged = event.target;
+    // make it half transparent
+    event.target.style.opacity = .5;
+}, false);
+
+document.addEventListener("dragend", function( event ) {
+    // reset the transparency
+    dragOnpage = false;
+    event.target.style.opacity = "";
 }, false);
 
 
@@ -91,13 +119,13 @@ let par;
 
 function imageInput(event) 
 {
-    
     event.preventDefault();
+    var dt = event.dataTransfer;
+
     file = event.dataTransfer.files[0];
-    console.log(event.target);
     par =  event.target;
     showImage(); 
-    console.log("HERE");
+
 };
 
 // //on drag over
@@ -133,6 +161,7 @@ function showImage()
     fileReader.onload = ()=>{
         let fileURL = fileReader.result;
         let image = document.createElement("img");
+        image.classList = "drag-img";
         image.src = fileURL;
         par.appendChild(image);
         }
