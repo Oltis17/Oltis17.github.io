@@ -11,7 +11,16 @@ function DeleteR(k)
 {
     if (confirm("Delete entire row?") == true)
     {
-        k.parent().remove();
+        if (document.getElementById("tier-list").childElementCount == 2)
+        {
+            alert("List must have a least 1 row.");
+
+        }
+        else
+        {
+            k.parent().remove();
+        }
+        
     }
 }
 
