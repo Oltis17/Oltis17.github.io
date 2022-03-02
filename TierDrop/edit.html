@@ -38,20 +38,21 @@
                 <button id="signin" class="btn menuButton btn-outline-dark text-uppercase" onclick="signin()">Sign in</button>
             </div>
         </div>
-        <div id="content">
-            <div class="part work-area">
+        <div id="full-width">
+            <div class="work-area">
                 <div id="top-bar">
-                    <button class="btn btn-warning">Clear list</button>
+                    <button class="btn btn-warning" onclick="clearList()">Clear list</button>
                     <input type="text" placeholder="Add list name"></input>
                     <button class="btn btn-info" data-toggle="modal" data-target="#modal-share">SHARE</button>
                 </div>
                 <div id="tier-list">
                     <div class="tier-row">
-                        <div class="tier-col-l" style="background-color: green;">
+                        <div class="tier-col-l" style="background-color: #008000;">
                             <i class="fa-solid fa-angle-up up"></i>
                             <i class="fa-solid fa-angle-down down"></i>
                             <div>Best</div>
-                            <i class="fa-solid fa-ellipsis more"></i>
+                            <i class="fa-solid fa-ellipsis more" data-container="body" data-toggle="popover" data-placement="right" title="Edit this row" data-html="true"
+                            data-content="<label>Title</label><input type='text' id='row-name'></input><br><label>Color</label><input type='color' id='row-color'></input>"></i>
                         </div>
                         <div class="tier-col-m">
                             
@@ -61,11 +62,12 @@
                         </div>
                     </div>
                     <div class="tier-row">
-                        <div class="tier-col-l" style="background-color: rgb(118, 168, 36);">
+                        <div class="tier-col-l" style="background-color: #75a824;">
                             <i class="fa-solid fa-angle-up up"></i>
                             <i class="fa-solid fa-angle-down down"></i>
                             <div>Good</div>
-                            <i class="fa-solid fa-ellipsis more"></i>
+                            <i class="fa-solid fa-ellipsis more" data-container="body" data-toggle="popover" data-placement="right" title="Edit this row" data-html="true"
+                            data-content="<label>Title</label><input type='text' id='row-name'></input><br><label>Color</label><input type='color' id='row-color'></input>"></i>
                         </div>
                         <div class="tier-col-m">
                             
@@ -75,11 +77,12 @@
                         </div>
                     </div>
                     <div class="tier-row">
-                        <div class="tier-col-l" style="background-color: rgb(204, 204, 47);">
+                        <div class="tier-col-l" style="background-color: #cccc2f;">
                             <i class="fa-solid fa-angle-up up"></i>
                             <i class="fa-solid fa-angle-down down"></i>
                             <div>Ok</div>
-                            <i class="fa-solid fa-ellipsis more"></i>
+                            <i class="fa-solid fa-ellipsis more" data-container="body" data-toggle="popover" data-placement="right" title="Edit this row" data-html="true"
+                            data-content="<label>Title</label><input type='text' id='row-name'></input><br><label>Color</label><input type='color' id='row-color'></input>"></i>
                         </div>
                         <div class="tier-col-m">
                             
@@ -89,11 +92,12 @@
                         </div>
                     </div>
                     <div class="tier-row">
-                        <div class="tier-col-l" style="background-color: orange;">
+                        <div class="tier-col-l" style="background-color: #ffa600;">
                             <i class="fa-solid fa-angle-up up"></i>
                             <i class="fa-solid fa-angle-down down"></i>
                             <div>Bad</div>
-                            <i class="fa-solid fa-ellipsis more"></i>
+                            <i class="fa-solid fa-ellipsis more" data-container="body" data-toggle="popover" data-placement="right" title="Edit this row" data-html="true"
+                            data-content="<label>Title</label><input type='text' id='row-name'></input><br><label>Color</label><input type='color' id='row-color'></input>"></i>
                         </div>
                         <div class="tier-col-m">
                             
@@ -103,11 +107,12 @@
                         </div>
                     </div>
                     <div class="tier-row">
-                        <div class="tier-col-l" style="background-color: rgb(175, 61, 19);">
+                        <div class="tier-col-l" style="background-color: #af3d13;">
                             <i class="fa-solid fa-angle-up up"></i>
                             <i class="fa-solid fa-angle-down down"></i>
                             <div>Worst</div>
-                            <i class="fa-solid fa-ellipsis more"></i>
+                            <i class="fa-solid fa-ellipsis more" data-container="body" data-toggle="popover" data-placement="right" title="Edit this row" data-html="true"
+                            data-content="<label>Title</label><input type='text' id='row-name'></input><br><label>Color</label><input type='color' id='row-color'></input>"></i>
                         </div>
                         <div class="tier-col-m">
                             
@@ -120,12 +125,12 @@
                         <button class="btn btn-secondary btn-lg btn-block" id="add-row"><i class="fa-solid fa-circle-plus"></i> Add row</button>
                     </div>
                 </div>
-               
+            
             </div>
-            <div class="part objects-choice">
+            <div class="objects-choice">
                 <div id="image-controls">
                     <h2>Choose objects</h2>
-                    <button class="btn btn-outline-primary" type="button" data-toggle="modal" data-target="#modal-add">Add custom</button>
+                    <button class="btn btn-success" type="button" data-toggle="modal" data-target="#modal-add">Add custom</button>
                 </div>
                 <div id="drag-and-drop">
                     <label><i class="fa-solid fa-images"></i> Drag and Drop </label>
@@ -133,6 +138,9 @@
                     <button class="btn btn-primary btn-lg">click here to browse</button>
                 </div>
             </div>
+        </div>
+        <div id="content">
+            
            
             <div class="part lists-gallery">
                 <h2>See what others created!</h2>

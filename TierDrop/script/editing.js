@@ -2,8 +2,9 @@ function AddR(k)
 {
     var newDiv = k.parent().parent().children(':first-child').clone();
     $(newDiv).find(".tier-col-l").find("div").text("NEW");
-    $(newDiv).find(".tier-col-l").css("background-color", "lightgray");
+    $(newDiv).find(".tier-col-l").css("background-color", "#999999");
     newDiv.insertBefore(k.parent());
+    $('[data-toggle="popover"]').popover();
 }
 
 function DeleteR(k) 
@@ -52,6 +53,16 @@ $(document).on('click', '.down', function ()
 {
     DownR($(this));
 });
+
+
+function clearList()
+{
+    if (confirm("Do you want to clear list? All progress will be deleted.") == true)
+    {
+        window.location.reload();
+    }
+
+}
 
 
 let dragOnpage = false;
@@ -128,26 +139,6 @@ function imageInput(event)
 
 };
 
-// //on drag over
-// dropArea.ondragover = (event) => {
-//   event.preventDefault();
-//   dropArea.classList.add("active");
-//   dragText.textContent = "Release to Upload File";
-// };
-
-// //on drag leave
-// dropArea.ondragleave = () => {
-//   dropArea.classList.remove("active");
-//   dragText.textContent = "Drag & Drop to Upload File";
-// };
-
-// //on drop
-// dropArea.ondrop = (event) => {
-//   event.preventDefault();
-//   file = event.dataTransfer.files[0];
-//   showImage(this);
-// };
-
 
 //change the image to droped imagege
 function showImage()
@@ -172,3 +163,63 @@ function showImage()
     dragText.textContent = "Drag & Drop to Upload File";
   }
 }
+
+
+$(document).ready(function(){
+
+    $('[data-toggle="popover"]').popover();
+
+});
+
+const rgb2hex = (rgb) => `#${rgb.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/).slice(1).map(n => parseInt(n, 10).toString(16).padStart(2, '0')).join('')}`
+
+let current;
+$(document).on('click', '.more', function (event) 
+{
+    current = this.parentElement.querySelector("div");
+    document.getElementById("row-name").value = this.parentElement.querySelector("div").innerHTML;
+    document.getElementById("row-color").value = rgb2hex(this.parentElement.style.backgroundColor);
+    var divsToHide = document.getElementsByClassName("more"); 
+    for(var i = 0; i < divsToHide.length; i++){
+        divsToHide[i].style.display = "none"; 
+    }
+});
+
+
+//   $('[data-toggle="popover"]').each( function() {
+//     //document.getElementsByClassName("row-name").value = this.parentElement.querySelector("div").innerHTML;
+//     $(this).popover();
+    
+//   });
+
+  $('html').on('click', function(e) {
+    if (typeof $(e.target).data('original-title') == 'undefined' &&
+       !$(e.target).parents().is('.popover')) {
+      $('[data-original-title]').popover('hide');
+      var divsToHide = document.getElementsByClassName("more"); //divsToHide is an array
+            for(var i = 0; i < divsToHide.length; i++){
+                divsToHide[i].style.display = ""; 
+            }
+    }
+  });
+
+
+  $(document).on('input', '#row-name', function () 
+{
+    current.innerHTML = this.value;
+});
+
+$(document).on('input', '#row-color', function () 
+{
+    current.parentElement.style.backgroundColor = this.value;
+    col = current.parentElement.style.backgroundColor
+    let rgb = col.slice(
+        col.indexOf("(") + 1, 
+        col.indexOf(")")
+    ).split(", ");
+    const brightness = Math.round(((parseInt(rgb[0]) * 299) +
+                      (parseInt(rgb[1]) * 587) +
+                      (parseInt(rgb[2]) * 114)) / 1000);
+    const textColour = (brightness > 125) ? 'black' : 'white';
+    current.parentElement.style.color = textColour;
+});
