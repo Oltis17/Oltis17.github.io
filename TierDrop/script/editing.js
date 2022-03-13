@@ -115,6 +115,13 @@ document.addEventListener("drop", function( event ) {
         
     }
 
+    if ( event.target.id == "add-row" ) {
+        dragged.remove();
+    }
+    document.getElementById("add-row").innerHTML = '<i class="fa-solid fa-circle-plus"></i> Add row';
+    document.getElementById("add-row").style.backgroundColor = "#6c757d";
+    document.getElementById("add-row").style.borderColor = "#6c757d";
+
 }, false);
 
 
@@ -124,6 +131,9 @@ document.addEventListener("dragstart", function( event ) {
     dragged = event.target;
     // make it half transparent
     event.target.style.opacity = .5;
+    document.getElementById("add-row").innerHTML = "Delete image";
+    document.getElementById("add-row").style.backgroundColor = "red";
+    document.getElementById("add-row").style.borderColor = "red";
 }, false);
 
 document.addEventListener("dragend", function( event ) {
@@ -131,6 +141,7 @@ document.addEventListener("dragend", function( event ) {
     dragOnpage = false;
     event.target.style.opacity = "";
 }, false);
+
 
 
 //Get DOM Elements
